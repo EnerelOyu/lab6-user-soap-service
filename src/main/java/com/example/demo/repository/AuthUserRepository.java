@@ -1,37 +1,16 @@
 package com.example.demo.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.AuthUser;
 
-//useriin medeellig listen hadaglah repository
 @Repository
-public class AuthUserRepository {
-	
-	private final List<AuthUser> users = new ArrayList<>();
-	//save method
-	public void save(AuthUser user) {
-		users.add(user);
-	}
-	
-	public AuthUser findByUsername(String username) {
-		for(AuthUser user : users) {
-			if(user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
-	}
-	
-	public AuthUser findByToken(String token) {
-		for(AuthUser user : users) {
-			if(user.getToken().equals(token)) {
-				return user;
-			}
-		}
-		return null;
-	}
+public interface AuthUserRepository extends JpaRepository<AuthUser, Integer> {
+
+    Optional<AuthUser> findByUsername(String username);
+
+    Optional<AuthUser> findByToken(String token);
 }

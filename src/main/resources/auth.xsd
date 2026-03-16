@@ -39,6 +39,7 @@
                 <xs:element name="success" type="xs:boolean"/>
                 <xs:element name="message" type="xs:string"/>
                 <xs:element name="token" type="xs:string" minOccurs="0"/>
+                <xs:element name="userId" type="xs:int" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -57,8 +58,24 @@
             <xs:sequence>
                 <xs:element name="valid" type="xs:boolean"/>
                 <xs:element name="message" type="xs:string"/>
+                <xs:element name="userId" type="xs:int" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
+    <xs:element name="LinkUserProfileRequest">
+    	<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="username" type="xs:string"/>
+	            <xs:element name="userId" type="xs:int"/>
+	        </xs:sequence>
+	    </xs:complexType>
+	</xs:element>
+	<xs:element name="LinkUserProfileResponse">
+	    <xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="success" type="xs:boolean"/>
+	            <xs:element name="message" type="xs:string"/>
+	        </xs:sequence>
+	    </xs:complexType>
+	</xs:element>
 </xs:schema>
