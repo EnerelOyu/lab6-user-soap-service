@@ -16,6 +16,7 @@ import com.example.demo.auth.ValidateTokenResponse;
 import com.example.demo.model.AuthUser;
 import com.example.demo.service.AuthService;
 
+
 @Endpoint
 public class AuthEndpoint {
 
@@ -26,13 +27,14 @@ public class AuthEndpoint {
         this.authService = authService;
     }
 
+    //шинэ хэрэглэгч бүртгэх method
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RegisterUserRequest")
     @ResponsePayload
     public RegisterUserResponse registerUser(@RequestPayload RegisterUserRequest request) {
         RegisterUserResponse response = new RegisterUserResponse();
-
+        //бүртгэл амжилттай эсэхийг AuthService-ээр шалгах
         boolean success = authService.registerUser(request.getUsername(), request.getPassword());
-
+        //бүртгэлийн үр дүнд тохируулан амжилт эсвэл алдааны мессежийг response-д тохируулах
         if (success) {
             response.setSuccess(true);
             response.setMessage("Хэрэглэгчийн бүртгэл амжилттай.");
@@ -44,13 +46,14 @@ public class AuthEndpoint {
         return response;
     }
 
+    //хэрэглэгч нэвтрэх method
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "LoginUserRequest")
     @ResponsePayload
     public LoginUserResponse loginUser(@RequestPayload LoginUserRequest request) {
         LoginUserResponse response = new LoginUserResponse();
-
+        //AuthService-ээр хэрэглэгчийн нэр болон нууц үгийг шалгах, амжилттай бол токен болон хэрэглэгчийн ID-г буцаана
         AuthUser user = authService.loginUser(request.getUsername(), request.getPassword());
-
+        //хэрэглэгчийн нэвтрэлт амжилттай эсэхийг шалгаж, тохирох мессеж болон токен, хэрэглэгчийн ID-г response-д тохируулах
         if (user != null) {
             response.setSuccess(true);
             response.setMessage("Нэвтрэлт амжилттай.");
@@ -67,6 +70,7 @@ public class AuthEndpoint {
         return response;
     }
 
+    //token-ний хүчинтэй эсэхийг шалгах method
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ValidateTokenRequest")
     @ResponsePayload
     public ValidateTokenResponse validateToken(@RequestPayload ValidateTokenRequest request) {
@@ -89,6 +93,7 @@ public class AuthEndpoint {
         return response;
     }
     
+    //нэвтэрсэн хэрэглэгчийн профайл ID-г хэрэглэгчийн profile ID-тэй холбох method
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "LinkUserProfileRequest")
     @ResponsePayload
     public LinkUserProfileResponse linkUserProfile(@RequestPayload LinkUserProfileRequest request) {
