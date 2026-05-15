@@ -16,7 +16,12 @@ import com.example.demo.auth.ValidateTokenResponse;
 import com.example.demo.model.AuthUser;
 import com.example.demo.service.AuthService;
 
-
+/*
+SOAP web service-ийн endpoint класс. 
+Энэ нь хэрэглэгчийн бүртгэл, нэвтрэлт, token-ний хүчинтэй эсэхийг шалгах болон хэрэглэгчийн 
+профайл ID-г холбох зэрэг үйлдлүүдийг гүйцэтгэх method-уудыг агуулна. 
+AuthService-ийг ашиглан бизнес логикыг гүйцэтгэнэ.
+*/
 @Endpoint
 public class AuthEndpoint {
 
